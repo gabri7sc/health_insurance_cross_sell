@@ -5,11 +5,9 @@ from healthinsurance.HealthInsurance import HealthInsurance
 import os
 
 # loading model
-
 model = pickle.load( open( 'model/model_linear_regression.pkl', 'rb' ) )
 
 # initialize API
-
 app = Flask(__name__)
 
 
@@ -25,15 +23,12 @@ def health_insurance_predict():
             test_raw = pd.DataFrame( test_json, columns=test_json[0].keys() )
 
         # Instantiate Rossmann class
-
         pipeline = HealthInsurance()
 
         # data cleaning
-
         df1 = pipeline.data_cleaning( test_raw )
 
         # feature engineering
-
         df2 = pipeline.feature_engineering( df1 )
 
         # data preparation
