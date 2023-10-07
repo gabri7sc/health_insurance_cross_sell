@@ -47,16 +47,16 @@ class HealthInsurance( object ):
         df5['vintage'] = self.vintage_scaler.transform( df5[['vintage']].values )
 
         # gender - One Hot Encoding / Target Encoding
-        df5.loc[:, 'gender'] = df5['gender'].map( self.target_encode_gender )
+        df5.loc[:, 'gender'] = df5['gender'].map( self.target_encode_gender_scaler )
 
         # region_code - Target Encoding / Frequency Encoding
-        df5.loc[:, 'region_code'] = df5['region_code'].map( self.target_encode_region_code )
+        df5.loc[:, 'region_code'] = df5['region_code'].map( self.target_encode_region_code_scaler )
 
         # vehicle_age - One Hot Encoding / Frequency Encoding
         df5 = pd.get_dummies( df5, prefix='vehicle_age', columns=['vehicle_age'] )
 
         # policy_sales_channel - Target Encoding / Frequency Encoding
-        df5.loc[:, 'policy_sales_channel'] = df5['policy_sales_channel'].map( self.fe_policy_sales_channel )
+        df5.loc[:, 'policy_sales_channel'] = df5['policy_sales_channel'].map( self.fe_policy_sales_channel_scaler )
 
         # Feature Selection
         cols_selected = ['annual_premium', 'vintage', 'age', 'region_code', 'vehicle_damage', 'previously_insured',
