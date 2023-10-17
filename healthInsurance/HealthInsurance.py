@@ -7,11 +7,11 @@ class HealthInsurance:
     def __init__(self):
         self.home_path                = ''
         
-        self.age_scaler                           = pickle.load(open(self.home_path + 'features/age_scaler.pkl', 'rb'))
-        self.annual_premium_scaler                = pickle.load(open(self.home_path + 'features/annual_premium_scaler.pkl', 'rb'))        
-        self.fe_policy_sales_channel_scaler       = pickle.load(open(self.home_path + 'features/fe_policy_sales_channel_scaler.pkl', 'rb'))        
-        self.fe_region_code_scaler                = pickle.load(open(self.home_path + 'features/fe_region_code_scaler.pkl', 'rb'))        
-        self.vintage_scaler                       = pickle.load(open(self.home_path + 'features/vintage_scaler.pkl', 'rb'))        
+        self.age_scaler                           = pickle.load(open(self.home_path + 'parameter/age_scaler.pkl', 'rb'))
+        self.annual_premium_scaler                = pickle.load(open(self.home_path + 'parameter/annual_premium_scaler.pkl', 'rb'))        
+        self.fe_policy_sales_channel_scaler       = pickle.load(open(self.home_path + 'parameter/fe_policy_sales_channel_scaler.pkl', 'rb'))        
+        self.target_encode_region_code_scaler     = pickle.load(open(self.home_path + 'parameter/target_encode_region_code_scaler.pkl', 'rb'))        
+        self.vintage_scaler                       = pickle.load(open(self.home_path + 'parameter/vintage_scaler.pkl', 'rb'))        
         
     def rename_columns(self, df1):
         cols_old = df1.columns
@@ -43,7 +43,7 @@ class HealthInsurance:
         df5['vehicle_age'] = df5['vehicle_age'].apply(lambda x: 0 if x == 'new' else 1 if x == 'used' else 2)
 
         #region_code - Frequency Encoding
-        df5['region_code'] = df5['region_code'].map(self.fe_region_code_scaler)
+        df5['region_code'] = df5['region_code'].map(self.target_encode_region_code_scaler)
         #pickle.dump(fe_region_code, open('C:/Users/edils/repos/pa004_health_insurance/src/features/fe_region_code_scaler.pkl','wb'))
 
         #policy_sales_channel
