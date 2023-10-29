@@ -60,8 +60,7 @@ class HealthInsurance( object ):
         df5.loc[:, 'policy_sales_channel'] = df5['policy_sales_channel'].map( self.fe_policy_sales_channel_scaler )
 
         # Feature Selection
-        cols_selected = ['annual_premium', 'vintage', 'age', 'region_code', 'vehicle_damage', 'previously_insured',
-                         'policy_sales_channel']
+        cols_selected = ['vintage', 'annual_premium', 'age', 'region_code', 'vehicle_damage', 'policy_sales_channel', 'previously_insured']
 
         return df5[cols_selected]
 
